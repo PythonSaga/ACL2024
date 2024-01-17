@@ -1,4 +1,4 @@
-# used for evaluating k=200 for 164 problems using code-llama-7b-py with temprature=0.8
+# used for evaluating k=200 for 164 problems using code-llama-7b with temprature=0.8
 
 from transformers import AutoTokenizer
 import transformers
@@ -8,7 +8,8 @@ import json
 import time
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
-model = "codellama/CodeLlama-7b-Python-hf"
+# model = "codellama/CodeLlama-7b-hf"
+model="mistralai/Mistral-7B-Instruct-v0.1"
 
 tokenizer = AutoTokenizer.from_pretrained(model)
 pipeline = transformers.pipeline(
@@ -23,23 +24,23 @@ def get_complition(prompt:str):
       sequences = pipeline(
       prompt,
       do_sample=True,
-      top_k=10,
-      temperature=0.8,
+      top_k=50,
+      temperature=0.7,
       top_p=0.95,
       num_return_sequences=1,
       eos_token_id=tokenizer.eos_token_id,
-      max_length=200,
+      max_length=400,
   )
       return sequences
   
 
 
-from human_eval.data import write_jsonl, read_problems
+from Benchmarking.data import write_jsonl, read_problems
 
 problems = read_problems()
 
 task_id=1
-num_samples_per_task = 200
+num_samples_per_task = 20
 # samples = [
 #     dict(task_id=task_id, completion=generate_one_completion(problems[task_id]["prompt"]))
 #     for task_id in problems
@@ -70,4 +71,4 @@ for task_id in problems:
     stop_t = time.time()
     print(f"task_id: {task_id_no} took {stop_t-start_t} seconds or {(stop_t-start_t)/60} minutes")
     task_id_no+=1
-write_jsonl("samples5.jsonl", samples)
+write_jsonl("sample_basic_3.jsonl", samples)

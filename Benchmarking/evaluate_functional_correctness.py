@@ -1,8 +1,8 @@
 import fire
 import sys
 
-from human_eval.data2 import HUMAN_EVAL
-from human_eval.evaluation import evaluate_functional_correctness
+from Benchmarking.data import HUMAN_EVAL
+from Benchmarking.evaluation import evaluate_functional_correctness
 
 
 def entry_point(
