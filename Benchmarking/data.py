@@ -5,12 +5,10 @@ import os
 
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-# HUMAN_EVAL = os.path.join(ROOT, "..", "data", "HumanEval.jsonl.gz")
-# HUMAN_EVAL = os.path.join(ROOT, "..", "data2", "He2.jsonl.gz")
-HUMAN_EVAL = os.path.join(ROOT, "..", "data2", "basic2.jsonl.gz") # this is the file that contains the tasks (prompts) and the test suites (test_suite) and the test suite solutions (test_suite_solutions) for each task
+Python_Saga = os.path.join(ROOT, "..", "Dataset", "sample_input.jsonl.gz") # this is the file that contains the tasks (prompts) and the test suites (test_suite) and the test suite solutions (test_suite_solutions) for each task
 
 
-def read_problems(evalset_file: str = HUMAN_EVAL) -> Dict[str, Dict]: # Dict[str, Dict[str, str]] means a dictionary with keys: task_id and values: another dictionary with keys: prompt, test_suite and test_suite_solutions (all strings)
+def read_problems(evalset_file: str = Python_Saga) -> Dict[str, Dict]: # Dict[str, Dict[str, str]] means a dictionary with keys: task_id and values: another dictionary with keys: prompt, test_suite and test_suite_solutions (all strings)
     return {task["task_id"]: task for task in stream_jsonl(evalset_file)} # here task is a dictionary with keys: task_id, prompt, test_suite and test_suite_solutions (all strings)
 
 
