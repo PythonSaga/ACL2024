@@ -1,5 +1,3 @@
-# used for evaluating k=200 for 164 problems using code-llama-7b with temprature=0.8
-
 from transformers import AutoTokenizer
 import transformers
 import torch
@@ -35,17 +33,13 @@ def get_complition(prompt:str):
   
 
 
-from Benchmarking.data import write_jsonl, read_problems
+from data import write_jsonl, read_problems
 
 problems = read_problems()
 
 task_id=1
 num_samples_per_task = 20
-# samples = [
-#     dict(task_id=task_id, completion=generate_one_completion(problems[task_id]["prompt"]))
-#     for task_id in problems
-#     for _ in range(num_samples_per_task)
-# ]
+
 # Initialize an empty list to store the samples
 samples = []
 task_id_no=1
@@ -71,4 +65,4 @@ for task_id in problems:
     stop_t = time.time()
     print(f"task_id: {task_id_no} took {stop_t-start_t} seconds or {(stop_t-start_t)/60} minutes")
     task_id_no+=1
-write_jsonl("sample_basic_3.jsonl", samples)
+write_jsonl("sample_output.jsonl", samples)
