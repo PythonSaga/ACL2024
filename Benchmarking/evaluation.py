@@ -6,7 +6,7 @@ import itertools
 import numpy as np
 import tqdm
 
-from Benchmarking.data import HUMAN_EVAL, read_problems, stream_jsonl, write_jsonl
+from Benchmarking.data import Python_Saga, read_problems, stream_jsonl, write_jsonl
 from Benchmarking.execution import check_correctness
 
 
@@ -41,7 +41,7 @@ def evaluate_functional_correctness(
     k: List[int] = [1, 10, 100],
     n_workers: int = 4,
     timeout: float = 3.0,
-    problem_file: str = HUMAN_EVAL,
+    problem_file: str = Python_Saga,
 ):
     """
     Evaluates the functional correctness of generated samples, and writes
