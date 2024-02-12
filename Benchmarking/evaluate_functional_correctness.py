@@ -1,7 +1,7 @@
 import fire
 import sys
 
-from Benchmarking.data import HUMAN_EVAL
+from Benchmarking.data import Python_Saga
 from Benchmarking.evaluation import evaluate_functional_correctness
 
 
@@ -10,7 +10,7 @@ def entry_point(
     k: str = "1,10,100", # this is the number of samples to be generated for each task
     n_workers: int = 4, # this is the number of workers to be used for the evaluation
     timeout: float = 20.0, # this is the timeout for each sample
-    problem_file: str = HUMAN_EVAL, # this is the file that contains the tasks (prompts) and the test suites (test_suite) and 
+    problem_file: str = Python_Saga, # this is the file that contains the tasks (prompts) and the test suites (test_suite) and 
                                     # the test suite solutions (test_suite_solutions) for each task
 ):
     """
