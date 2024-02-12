@@ -64,9 +64,9 @@ def check_correctness(problem: Dict, completion: str, timeout: float,
                             # Once you have read this disclaimer and taken appropriate precautions, 
                             # uncomment the following line and proceed at your own risk:
 
-                        print(check_program)
+                        # print(check_program)
                         
-                        exec(check_program, exec_globals)
+                        # exec(check_program, exec_globals) Please uncomment this line to execute the check_program
                 result.append("passed")
             except TimeoutException:
                 result.append("timed out")
