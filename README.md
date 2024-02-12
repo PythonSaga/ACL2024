@@ -3,8 +3,8 @@ This dataset follows the rules and diversity of template suggested in the paper 
 <br>
 <br>
 
-| Model                                  | Size | Pass@1 | Pass@10 | |
-|----------------------------------------|---------------|---------|-|-
+| Model                                  | Size | Pass@1 | Pass@10 |
+|----------------------------------------|---------------|---------|
 |                            |*Open-Source Models*
 | Code Llama Python       | 7B           | 0.0240        | 0.0979           
 | Code Llama Instruct     | 7B           | 0.0178        | 0.0744           
