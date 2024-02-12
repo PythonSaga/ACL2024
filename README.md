@@ -1,24 +1,45 @@
-# HumanEval: Hand-Written Evaluation Set 
+<h1 style="text-align: center;">PythonSaga</h1>
+This dataset follows the rules and diversity of template suggested in the paper "*Boldly Going Where No Benchmark Has Gone Before: Exposing Bias and Shortcomings in Code Generation Evaluation.*" The goal is to make benchmarks better at assessing Code Generating Language Models (LLMs).
+<br>
+<br>
 
-This is an evaluation harness for the HumanEval problem solving dataset
-described in the paper "[Evaluating Large Language Models Trained on
-Code](https://arxiv.org/abs/2107.03374)".
+| Model                                  | Size | Pass@1 | Pass@10 | |
+|----------------------------------------|---------------|---------|-|-
+|                            |*Open-Source Models*
+| Code Llama Python       | 7B           | 0.0240        | 0.0979           
+| Code Llama Instruct     | 7B           | 0.0178        | 0.0744           
+| Mistral-Instruct-v0.1   | 7B           | 0.0140        | 0.0552           
+| Code Llama              | 7B           | 0.0067        | 0.0472           
+| StarCoderBase           | 7B           | 0.0029        | 0.0149           
+| Deepseek Coder Instruct | 6.7B         | 0.0137        | 0.0889           
+| Deepseek Coder          | 6.7B         | 0.0343        | 0.1415 
+|                         |*Close-Source Models*          
+| GPT-3.5                 |              | 0.0724        | 0.2384                 
+| GPT-4                   |              | 0.1243        | 0.3311                 
+| Gemini Pro              |              |               |                  
 
-## Installation
+*Comparison between open and closed-source models on PythonSaga. We use the number of samples (n)
+as 20 for both open and closed-source models.*
 
-Make sure to use python 3.7 or later:
+<br>
+<br>
+<h2 style="text-align: center;">Installation</h2>
+(This repository is forked from https://github.com/openai/human-eval)
+
+Make sure to use python 3.8 or later:
 ```
-$ conda create -n codex python=3.7
-$ conda activate codex
+$ conda create -n pythonsaga python=3.8
+$ conda activate pythonsaga
 ```
 
 Check out and install this repository:
 ```
-$ git clone https://github.com/openai/human-eval
-$ pip install -e human-eval
+$ git clone https://github.com/PythonSaga/ACL2024
 ```
 
-## Usage
+<br>
+<br>
+<h2 style="text-align: center;">Usage</h2>
 
 **This program exists to run untrusted model-generated code. Users are strongly
 encouraged not to do so outside of a robust security sandbox. The [execution
@@ -31,40 +52,26 @@ After following the above instructions to enable execution, generate samples
 and save them in the following JSON Lines (jsonl) format, where each sample is
 formatted into a single line like so:
 ```
-{"task_id": "Corresponding HumanEval task ID", "completion": "Completion only without the prompt"}
+{"task_id": "Corresponding PythonSaga task ID", "completion": "Completion done by evaluating model"}
 ```
-We provide `example_problem.jsonl` and `example_solutions.jsonl` under `data`
-to illustrate the format and help with debugging.
+There is `example_prompt.jsonl` and `example_solutions.jsonl` in `Dataset` section to showcase the input and output during the evaluation process.
 
-Here is nearly functional example code (you just have to provide
-`generate_one_completion` to make it work) that saves generated completions to
-`samples.jsonl`.
-```
-from human_eval.data import write_jsonl, read_problems
 
-problems = read_problems()
 
-num_samples_per_task = 200
-samples = [
-    dict(task_id=task_id, completion=generate_one_completion(problems[task_id]["prompt"]))
-    for task_id in problems
-    for _ in range(num_samples_per_task)
-]
-write_jsonl("samples.jsonl", samples)
-```
+The fully functional code that saves the generated complition is provided as `generate.py` which uses Code-LLMs through **HuggingFace** pipeline. (You can further make changes in generate.py as per yoour preference)
 
-To evaluate the samples, run
+<br>
+<br>
+Later to further evaluate the generated samples use
 ```
-$ evaluate_functional_correctness samples.jsonl
-Reading samples...
-32800it [00:01, 23787.50it/s]
-Running test suites...
-100%|...| 32800/32800 [16:11<00:00, 33.76it/s]
-Writing results to samples.jsonl_results.jsonl...
-100%|...| 32800/32800 [00:00<00:00, 42876.84it/s]
-{'pass@1': ..., 'pass@10': ..., 'pass@100': ...}
+$ evaluate_functional_correctness samples.jsonl 
+OR
+$ python evaluate_functional_correctness.py samples.jsonl
+
+In the end you will recieve the results something like this:
+{ 'pass@1': ___, 'pass@10': ___, 'pass@100': ___ }
 ```
-This script provides more fine-grained information in a new file ending in
+This script also provides more fine-grained information in a new file ending in
 `<input_path>_results.jsonl`. Each row now contains whether the completion
 `passed` along with the execution `result` which is one of "passed", "timed
 out", or "failed".
@@ -73,11 +80,7 @@ As a quick sanity-check, the example samples should yield 0.5 pass@1.
 ```
 $ evaluate_functional_correctness data/example_samples.jsonl --problem_file=data/example_problem.jsonl
 Reading samples...
-6it [00:00, 3397.11it/s]
-Running example suites...
-100%|...| 6/6 [00:03<00:00,  1.96it/s]
-Writing results to data/example_samples.jsonl_results.jsonl...
-100%|...| 6/6 [00:00<00:00, 6148.50it/s]
+
 {'pass@1': 0.4999999999999999}
 ```
 
@@ -89,8 +92,10 @@ other options, see
 $ evaluate_functional_correctness --help
 ```
 However, we recommend that you use the default values for the rest.
-
-## Known Issues
+```
+<br>
+<br>
+<h2 style="text-align: center;">Known Issues</h2>
 
 While evaluation uses very little memory, you might see the following error
 message when the system is running out of RAM. Since this may cause some
@@ -99,17 +104,4 @@ correct programs to fail, we recommend that you free some memory and try again.
 malloc: can't allocate region
 ```
 
-## Citation
 
-Please cite using the following bibtex entry:
-
-```
-@article{chen2021codex,
-  title={Evaluating Large Language Models Trained on Code},
-  author={Mark Chen and Jerry Tworek and Heewoo Jun and Qiming Yuan and Henrique Ponde de Oliveira Pinto and Jared Kaplan and Harri Edwards and Yuri Burda and Nicholas Joseph and Greg Brockman and Alex Ray and Raul Puri and Gretchen Krueger and Michael Petrov and Heidy Khlaaf and Girish Sastry and Pamela Mishkin and Brooke Chan and Scott Gray and Nick Ryder and Mikhail Pavlov and Alethea Power and Lukasz Kaiser and Mohammad Bavarian and Clemens Winter and Philippe Tillet and Felipe Petroski Such and Dave Cummings and Matthias Plappert and Fotios Chantzis and Elizabeth Barnes and Ariel Herbert-Voss and William Hebgen Guss and Alex Nichol and Alex Paino and Nikolas Tezak and Jie Tang and Igor Babuschkin and Suchir Balaji and Shantanu Jain and William Saunders and Christopher Hesse and Andrew N. Carr and Jan Leike and Josh Achiam and Vedant Misra and Evan Morikawa and Alec Radford and Matthew Knight and Miles Brundage and Mira Murati and Katie Mayer and Peter Welinder and Bob McGrew and Dario Amodei and Sam McCandlish and Ilya Sutskever and Wojciech Zaremba},
-  year={2021},
-  eprint={2107.03374},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG}
-}
-```
