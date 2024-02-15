@@ -1,5 +1,5 @@
 <h1 style="text-align: center;">PythonSaga</h1>
-This dataset follows the rules and diversity of template suggested in the paper **PythonSaga: Redefining the Benchmark to Evaluate Code Generating LLM** The goal is to make benchmarks better at assessing Code Generating Language Models (LLMs).
+This dataset follows the rules and diversity of template suggested in the paper "PythonSaga: Redefining the Benchmark to Evaluate Code Generating LLM" The goal is to make benchmarks better at assessing Code Generating Language Models (LLMs).
 <br>
 <br>
 
