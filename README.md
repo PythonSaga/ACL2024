@@ -15,8 +15,7 @@ This dataset follows the rules and diversity of template suggested in the paper 
 | Deepseek Coder          | 6.7B         | 0.0343        | 0.1415 
 |                         |*Close-Source Models*          
 | GPT-3.5                 |              | 0.0724        | 0.2384                 
-| GPT-4                   |              | 0.1243        | 0.3311                 
-| Gemini Pro              |              |               |                  
+| GPT-4                   |              | 0.1243        | 0.3311                                 
 
 *Comparison between open and closed-source models on PythonSaga. We use the number of samples (n)
 as 20 for both open and closed-source models.*
