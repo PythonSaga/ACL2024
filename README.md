@@ -3,19 +3,25 @@ This dataset follows the rules and diversity of template suggested in the paper 
 <br>
 <br>
 
-| Model                                  | Size | Pass@1 | Pass@10 |
-|----------------------------------------|---------------|---------|-
-|                            |*Open-Source Models*
-| Code Llama Python       | 7B           | 0.0240        | 0.0979           
-| Code Llama Instruct     | 7B           | 0.0178        | 0.0744           
-| Mistral-Instruct-v0.1   | 7B           | 0.0140        | 0.0552           
-| Code Llama              | 7B           | 0.0067        | 0.0472           
-| StarCoderBase           | 7B           | 0.0029        | 0.0149           
-| Deepseek Coder Instruct | 6.7B         | 0.0137        | 0.0889           
-| Deepseek Coder          | 6.7B         | 0.0343        | 0.1415 
-|                         |*Close-Source Models*          
-| GPT-3.5                 |              | 0.0724        | 0.2384                 
-| GPT-4                   |              | 0.1243        | 0.3311                                 
+| **Model**                     | **Size** | **Pass@1** | **Pass@10** |
+|-------------------------------|----------|------------|-------------|
+| StarCoderBase                 | 7B       | 0.0029     | 0.0149      |
+| StarCoder2                    | 7B       | 0.0024     | 0.0217      |
+| Code Llama                    | 7B       | 0.0067     | 0.0472      |
+| CodeQwen1.5-Chat              | 7B       | 0.0059     | 0.0497      |
+| Nxcode-CQ-orpo                | 7B       | 0.0058     | 0.0523      |
+| Mistral-Instruct-v0.1         | 7B       | 0.0140     | 0.0552      |
+| Code Llama Instruct           | 7B       | 0.0178     | 0.0744      |
+| Deepseek Coder Instruct       | 6.7B     | 0.0137     | 0.0889      |
+| Code Llama Python             | 7B       | 0.0240     | 0.0979      |
+| Llama 3                       | 8B       | 0.0370     | 0.1125      |
+| Phi-2                         | 2.7B     | 0.0302     | 0.1187      |
+| OpenCodeInterpreter-DS        | 6.7B     | 0.0259     | 0.1206      |
+| Deepseek Coder                | 6.7B     | 0.0343     | 0.1415      |
+| Code Llama Python             | 13B      | 0.0405     | 0.1514      |
+| GPT-3.5                       | NA       | 0.0724     | 0.2384      |
+| GPT-4                         | NA       | 0.1243     | 0.3311      |
+                              
 
 *Comparison between open and closed-source models on PythonSaga. We use the number of samples (n)
 as 20 for both open and closed-source models.*
